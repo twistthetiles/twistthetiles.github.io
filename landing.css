@@ -371,47 +371,36 @@ main { padding: 0 var(--gutter); }
 .demo-hint .g { color: #3ddc84; }
 .demo-hint .o { color: #ff9f43; }
 
-/* Green / orange feedback on the line that was just moved: a glowing
-   frame hugging the three tiles, with a round badge, as in the game. */
-.move-flash {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-  border: 4px solid var(--fc);
-  border-radius: 24px;
-  box-shadow: 0 0 18px 2px var(--glow);
-  animation: flash 1.3s ease forwards;
+/* Green / orange feedback on the tiles that were just moved, as in the game. */
+.tile .face { transition: border-color 0.2s, box-shadow 0.2s; }
+.tile.good { --fc: #3ddc84; }
+.tile.bad { --fc: #ff9f43; }
+.tile.hit .face {
+  border: 3.5px solid var(--fc);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25), 0 0 0 1.5px var(--fc), 0 0 18px var(--fc);
 }
-.move-flash.good { --fc: #3ddc84; --glow: rgba(61, 220, 132, 0.6); }
-.move-flash.bad { --fc: #ff9f43; --glow: rgba(255, 159, 67, 0.6); }
-.move-flash.row { left: 3px; right: 3px; top: calc(var(--i) * 33.3333% + 3px); height: calc(33.3333% - 6px); }
-.move-flash.col { top: 3px; bottom: 3px; left: calc(var(--i) * 33.3333% + 3px); width: calc(33.3333% - 6px); }
-.move-flash .badge {
+.hit-badge {
   position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 30%;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: var(--fc);
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   color: #fff;
-  font: 900 22px/1 system-ui, -apple-system, sans-serif;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-  animation: badge-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  font: 900 clamp(13px, 4vw, 20px)/1 system-ui, -apple-system, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  animation: badge-pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both;
 }
-.move-flash.row .badge { right: 8px; top: 50%; margin-top: -21px; }
-.move-flash.col .badge { bottom: 8px; left: 50%; margin-left: -21px; }
-@media (max-width: 600px) {
-  .move-flash { border-width: 3px; border-radius: 18px; }
-  .move-flash .badge { width: 30px; height: 30px; border-width: 2px; font-size: 16px; }
-  .move-flash.row .badge { right: 4px; margin-top: -15px; }
-  .move-flash.col .badge { bottom: 4px; margin-left: -15px; }
-}
-@keyframes flash { 0% { opacity: 0; } 10%, 65% { opacity: 1; } 100% { opacity: 0; } }
+.hit-badge.good { --fc: #3ddc84; }
+.hit-badge.bad { --fc: #ff9f43; }
 @keyframes badge-pop { from { transform: scale(0); } to { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .move-flash, .move-flash .badge { animation-duration: 0.01s; animation-fill-mode: none; } }
+@media (prefers-reduced-motion: reduce) { .hit-badge { animation: none; } }
 
 .confetti { position: absolute; top: 40%; left: 50%; width: 10px; height: 14px; border-radius: 3px; z-index: 4; pointer-events: none; animation: burst 1.1s ease-out forwards; }
 @keyframes burst { to { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; } }

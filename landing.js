@@ -197,6 +197,7 @@
   function doMove(m) {
     if (busy || !winEl.hidden) return;
     busy = true;
+    clearFlash();
 
     // The tile that wraps leaves through one edge (a ghost copy) and
     // enters from the opposite edge.
@@ -244,20 +245,29 @@
     }, ANIM_MS);
   }
 
-  // Like the game: the moved line glows green with a tick when the move got
+  // Like the game: the moved tiles glow green with a tick when the move got
   // closer to the target, orange when it went further away, and nothing
-  // when it made no difference.
-  let flashEl = null;
+  // when it made no difference. The glow sits on the tiles themselves, so
+  // it lines up on every screen size.
+  let flashTimer = null;
+  function clearFlash() {
+    clearTimeout(flashTimer);
+    tileEls.forEach((el) => el.classList.remove('hit', 'good', 'bad'));
+    grid.querySelectorAll('.hit-badge').forEach((b) => b.remove());
+  }
   function flashMove(m, change) {
+    clearFlash();
     if (change === 0) return;
-    if (flashEl) flashEl.remove();
-    const el = document.createElement('div');
-    el.className = 'move-flash ' + (change < 0 ? 'good' : 'bad') + (m.row != null ? ' row' : ' col');
-    el.style.setProperty('--i', m.row != null ? m.row : m.col);
-    el.innerHTML = `<span class="badge">${change < 0 ? '✓' : '↺'}</span>`;
-    grid.appendChild(el);
-    flashEl = el;
-    setTimeout(() => { if (el.parentNode) el.remove(); }, 1200);
+    const kind = change < 0 ? 'good' : 'bad';
+    const cells = m.row != null
+      ? [m.row * 3, m.row * 3 + 1, m.row * 3 + 2]
+      : [m.col, m.col + 3, m.col + 6];
+    cells.forEach((cell) => tileEls[board9[cell]].classList.add('hit', kind));
+    const badge = document.createElement('span');
+    badge.className = 'hit-badge ' + kind;
+    badge.textContent = change < 0 ? '✓' : '↺';
+    tileEls[board9[cells[2]]].appendChild(badge);
+    flashTimer = setTimeout(clearFlash, 1100);
   }
 
   function win() {
