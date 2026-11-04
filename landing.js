@@ -261,6 +261,10 @@
     const el = document.createElement('div');
     el.className = 'move-flash ' + (change < 0 ? 'good' : 'bad') + (m.row != null ? ' row' : ' col');
     el.style.setProperty('--i', m.row != null ? m.row : m.col);
+    // Round the frame exactly like the tiles (20% of a tile face) plus the
+    // line's own width, so the curves sit flush at the corners.
+    const face = tileEls[0].querySelector('.face');
+    el.style.borderRadius = `${face.offsetWidth * 0.2 + 3}px`;
     el.innerHTML = `<span class="badge">${change < 0 ? '✓' : '↺'}</span>`;
     grid.appendChild(el);
     flashEl = el;
