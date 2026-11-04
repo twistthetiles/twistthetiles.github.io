@@ -225,6 +225,7 @@
     }
 
     board.classList.remove('nudge');
+    const before = board9;
     board9 = applyMove(board9, m);
     moves++;
     movesEl.textContent = String(moves);
@@ -239,7 +240,24 @@
     setTimeout(() => {
       busy = false;
       if (board9.join() === SOLVED.join()) win();
+      else flashMove(m, shortest(board9) - shortest(before));
     }, ANIM_MS);
+  }
+
+  // Like the game: the moved line glows green with a tick when the move got
+  // closer to the target, orange when it went further away, and nothing
+  // when it made no difference.
+  let flashEl = null;
+  function flashMove(m, change) {
+    if (change === 0) return;
+    if (flashEl) flashEl.remove();
+    const el = document.createElement('div');
+    el.className = 'move-flash ' + (change < 0 ? 'good' : 'bad') + (m.row != null ? ' row' : ' col');
+    el.style.setProperty('--i', m.row != null ? m.row : m.col);
+    el.innerHTML = `<span class="badge">${change < 0 ? '✓' : '↺'}</span>`;
+    grid.appendChild(el);
+    flashEl = el;
+    setTimeout(() => { if (el.parentNode) el.remove(); }, 1200);
   }
 
   function win() {
