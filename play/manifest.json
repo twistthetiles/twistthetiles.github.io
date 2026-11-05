@@ -1,0 +1,35 @@
+{
+    "name": "Twist the Tiles",
+    "short_name": "Twist Tiles",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#120a33",
+    "theme_color": "#120a33",
+    "description": "Slide rows and columns to match the picture. A calm 3\u00d73 puzzle.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

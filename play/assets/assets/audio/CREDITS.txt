@@ -1,0 +1,31 @@
+Audio sources — all CC0 (public domain): free for commercial use, no credit required.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Sound effects — Kenney "Interface Sounds" (https://kenney.nl/assets/interface-sounds)
+  tap.wav      <- drop_002.ogg
+  slide.wav    <- switch_002.ogg
+  undo.wav     <- switch_002.ogg (played backwards)
+  hint.wav     <- confirmation_004.ogg
+  star1.wav    <- glass_003.ogg
+  star2.wav    <- glass_003.ogg (pitched up x1.122)
+  star3.wav    <- glass_003.ogg (pitched up x1.26)
+
+Jingles — Kenney "Music Jingles" (https://kenney.nl/assets/music-jingles)
+  win.wav      <- jingles_PIZZI15.ogg
+  lose.wav     <- jingles_PIZZI14.ogg
+  world.wav    <- jingles_STEEL10.ogg
+
+Sound effects — Kenney "Impact Sounds" (https://kenney.nl/assets/impact-sounds)
+  snap.wav     <- impactGlass_light_002.ogg
+
+Music — "Morning Sky" (piano version) by Centurion_of_war, OpenGameArt (https://opengameart.org/node/179462)
+  music_piano.m4a <- morning_2d.1_piano.mp3 (converted to AAC 96 kbps)
+
+Level music — "JRPG Music Pack #4 [Calm]" by Juhani Junkala / SubspaceAudio, OpenGameArt (https://opengameart.org/content/jrpg-pack-4-calm), CC0
+  music_calm1.m4a <- Calm1 - A Place I Call Home.ogg
+  music_calm2.m4a <- Calm2 - Childhood Friends.ogg
+  music_calm3.m4a <- Calm3 - Peaceful Days.ogg
+  music_calm4.m4a <- Calm4 - Sand Castles.ogg
+  music_calm5.m4a <- Calm5 - Summer Memories.ogg
+  music_calm6.m4a <- Calm6 - Innocence.ogg
+  (loudness matched to music_piano.m4a, converted to AAC 96 kbps)
