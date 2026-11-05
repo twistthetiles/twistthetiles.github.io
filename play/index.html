@@ -38,11 +38,17 @@
     <div class="bar"><i></i></div>
   </div>
   <script>
-    // Hide the loading screen once Flutter has drawn its first frame.
-    window.addEventListener('flutter-first-frame', function () {
+    // The game calls this once its home screen is ready, so players see
+    // one loading screen. A fallback hides it if that never comes.
+    window.__hideLoader = function () {
       var l = document.getElementById('loading');
+      if (!l || l.dataset.hidden) return;
+      l.dataset.hidden = '1';
       l.style.opacity = '0';
       setTimeout(function () { l.remove(); }, 450);
+    };
+    window.addEventListener('flutter-first-frame', function () {
+      setTimeout(window.__hideLoader, 8000);
     });
   </script>
   <script src="flutter_bootstrap.js" async></script>
