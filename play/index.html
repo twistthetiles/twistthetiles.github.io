@@ -38,6 +38,56 @@
     <div class="bar"><i></i></div>
   </div>
   <script>
+    // Short sound effects through Web Audio: decoded once, they play
+    // instantly. (Plain <audio> lags on phones, and iPhone Safari blocks
+    // sounds that don't start inside a tap.) The first tap unlocks it.
+    window.__sfx = (function () {
+      var ctx = null, buffers = {};
+      function context() {
+        if (!ctx) {
+          var C = window.AudioContext || window.webkitAudioContext;
+          if (!C) return null;
+          ctx = new C();
+        }
+        return ctx;
+      }
+      return {
+        load: function (name, url) {
+          var c = context();
+          if (!c) return;
+          fetch(url).then(function (r) { return r.arrayBuffer(); })
+            .then(function (data) {
+              return new Promise(function (ok, fail) { c.decodeAudioData(data, ok, fail); });
+            })
+            .then(function (buffer) { buffers[name] = buffer; })
+            .catch(function () {});
+        },
+        unlock: function () {
+          var c = context();
+          if (!c || c.state === 'running') return;
+          c.resume();
+          // iPhone also wants a sound started inside the tap.
+          var s = c.createBufferSource();
+          s.buffer = c.createBuffer(1, 1, 22050);
+          s.connect(c.destination);
+          s.start(0);
+        },
+        play: function (name, volume) {
+          var b = buffers[name];
+          if (!ctx || !b) return;
+          if (ctx.state !== 'running') ctx.resume();
+          var s = ctx.createBufferSource();
+          s.buffer = b;
+          var g = ctx.createGain();
+          g.gain.value = volume;
+          s.connect(g);
+          g.connect(ctx.destination);
+          s.start(0);
+        }
+      };
+    })();
+  </script>
+  <script>
     // The game calls this once its home screen is ready, so players see
     // one loading screen. A fallback hides it if that never comes.
     window.__hideLoader = function () {
