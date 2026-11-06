@@ -75694,13 +75694,13 @@ kG(a){if(this.p2===a)return
 this.p2=a
 if(a)A.ao9("game","gameplayStart")
 else A.ao9("game","gameplayStop")},
-aa0(a,b,c){var s,r,q=this,p="\nCan you do it in fewer? https://twistthetiles.github.io/",o=B.d.a0("\u2b50",b)+B.d.a0("\u2606",3-b),n=a===1?"1 move":""+a+" moves"
+aa0(a,b,c){var s,r,q=this,p="\nCan you do it in fewer? https://twistthetiles.github.io/get/",o=B.d.a0("\u2b50",b)+B.d.a0("\u2606",3-b),n=a===1?"1 move":""+a+" moves"
 switch(q.a.d.a){case 2:s=new A.eF(Date.now(),0,!1)
 s=Math.max(1,B.h.c0(A.Y_(A.a64(s),A.a63(s),A.a62(s)).dO(A.Y_(2026,11,1)).a,864e8)+1)
 r=q.f
 if(r==null)r=""
 else r="\n"+A.arp(r," DAY STREAK!","-day streak")
-r="\ud83e\udde9 Twist the Tiles Daily #"+A.j(s)+"\nSolved in "+n+" "+o+r+"\nCan you beat it? https://twistthetiles.github.io/"
+r="\ud83e\udde9 Twist the Tiles Daily #"+A.j(s)+"\nSolved in "+n+" "+o+r+"\nCan you beat it? https://twistthetiles.github.io/get/"
 s=r
 break
 case 1:s=q.d
